@@ -14,16 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Google Cloud SDK
+      # Step 2: Authenticate with Google Cloud
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_KEY }}
+
+      # Step 3: Set up Google Cloud SDK
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          service_account_key: ${{ secrets.GCP_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-
-      # Step 3: Authenticate with GCP
-      - name: Authenticate with GCP
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_KEY }}
 
       # Step 4: Install dependencies
       - name: Install Node.js dependencies
