@@ -1,0 +1,37 @@
+name: Deploy to App Engine
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Google Cloud SDK
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      # Step 3: Authenticate with GCP
+      - name: Authenticate with GCP
+        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_KEY }}
+
+      # Step 4: Install dependencies
+      - name: Install Node.js dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm install
+
+      # Step 5: Deploy to App Engine
+      - name: Deploy to App Engine
+        run: gcloud app deploy --quiet
