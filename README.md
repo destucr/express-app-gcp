@@ -1,11 +1,9 @@
----
 
 # Node.js App for Google App Engine
 
 ## **Description**
 A Node.js app with controllers, routes, and middleware, deployable on Google App Engine.
 
----
 
 ## **Project Structure**
 ```plaintext
@@ -16,8 +14,6 @@ A Node.js app with controllers, routes, and middleware, deployable on Google App
 /middlewares/   # Custom middleware
 ```
 
----
-
 ## **Setup**
 
 ### **Install and Run Locally**
@@ -25,8 +21,6 @@ A Node.js app with controllers, routes, and middleware, deployable on Google App
 npm install
 npm start
 ```
-
----
 
 ## **Deploy to App Engine**
 1. Ensure `app.yaml` is configured:
@@ -42,5 +36,3 @@ npm start
    ```bash
    gcloud app deploy
    ```
-
----
